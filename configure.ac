@@ -1,7 +1,7 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_PREREQ([2.69])
+AC_PREREQ([2.68])
 AC_INIT([fell], [0.1], [fried.ice.94@gmail.com])
 AM_INIT_AUTOMAKE
 AC_CONFIG_SRCDIR([src/fell.c])
@@ -9,6 +9,7 @@ AC_CONFIG_HEADERS([config.h])
 
 # Checks for programs.
 AC_PROG_CC
+AC_PROG_CC_STDC
 
 # Checks for libraries.
 

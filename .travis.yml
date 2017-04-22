@@ -1,0 +1,13 @@
+language: c
+
+compiler:
+        - gcc
+        - clang
+
+dist: trusty
+sudo: required
+
+script:
+        - ./prepare.sh
+        - ./configure
+        - make
