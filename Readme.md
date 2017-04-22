@@ -1,6 +1,7 @@
 # FELL - the Furious shELL
-## Overview
+[![Build Status](https://travis-ci.org/fried-ice/connect_four.svg?branch=master)](https://travis-ci.org/fried-ice/connect_four)
 
+## Overview
 Fell is a simple shell programm.
 I use it to aproach Linux API basics and understand the usage of GNU Automake and CMake build systems.
 
