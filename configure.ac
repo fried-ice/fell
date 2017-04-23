@@ -3,7 +3,7 @@
 
 AC_PREREQ([2.68])
 AC_INIT([fell], [0.1], [fried.ice.94@gmail.com])
-AM_INIT_AUTOMAKE
+AM_INIT_AUTOMAKE([subdir-objects])
 AC_CONFIG_SRCDIR([src/fell.c])
 AC_CONFIG_HEADERS([config.h])
 
