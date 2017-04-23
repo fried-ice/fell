@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <sys/wait.h>
+#include <sys/types.h>
 #include <string.h>
 
 #define INP_BLEN 1024
@@ -81,13 +83,14 @@ int main() {
 
 		// Actual process initialization
 		int pid = fork();
+		int child_status = 0;
 
 		if (pid < 0) {
 			perror("Error during fork");
 		} else if (pid == 0) { // Child process
 			handleChild(cmd_buff, inp_len);
 		} else {
-			waitpid(pid);
+			waitpid(pid, &child_status, WUNTRACED | WCONTINUED);
 		}
 
 		memset(inp_buff, 0, inp_len);
