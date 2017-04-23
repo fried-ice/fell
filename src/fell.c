@@ -5,8 +5,13 @@
 #include <sys/types.h>
 #include <string.h>
 #include <stdbool.h>
+#include <getopt.h>
 
 #include "vec.h"
+
+#define VERSION_MAJOR 0
+#define VERSION_MINOR 1
+#define VERSION_PATCH 0
 
 #define CMD_EXIT "exit"
 
@@ -93,7 +98,7 @@ int mainLoop() {
 		// Exit shell
 		if (msg_buff == 1) {
 			printf("Exiting!\n");
-			return 0;
+			break;
 		}
 
 		printf("\n");
@@ -114,12 +119,31 @@ int mainLoop() {
 		inp_buff = NULL;
 		vec_free(&args);
 	}
-	return 0;
+	return EXIT_SUCCESS;
 }
 
 
-int main() {
-	printf("Welcome to fell, the furious shell!\n\n");
+int main(int argc, char **argv) {
+	printf("Welcome to fell, the furious shell!\n");
+
+	static struct option long_options[] = {
+		{"version", no_argument, NULL, 'v'},
+		{"help", no_argument, NULL, 'h'},
+		{0, 0, 0, 0}
+	};
+
+	int c = 0;
+	while((c = getopt_long(argc, argv, "vh", long_options, NULL)) != -1) {
+		switch (c) {
+			case 'v':
+				printf("fell version %d.%d.%d\n", VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH);
+				return EXIT_SUCCESS;
+			case 'h':
+				puts("For help, read fell´s man page - 'man 1 fell'");
+				return EXIT_SUCCESS;
+		}
+
+	}
 
 	return mainLoop();
 }
