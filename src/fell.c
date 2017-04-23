@@ -28,7 +28,9 @@ char* getSubstring(char* input, long unsigned start, long unsigned int end) {
 	long unsigned int len = end - start;
 	char* sub_string = malloc((len) * sizeof(char));
 	memcpy(sub_string, &input[start], len * sizeof(char));
-	//printf("START %d, END %d, SUBSTRING %s\n", start, end, sub_string);
+	#if VLEVEL > 2
+	printf("START %d, END %d, SUBSTRING %s\n", start, end, sub_string);
+	#endif
 	return sub_string;
 }
 
@@ -49,7 +51,9 @@ unsigned int getArgs(char* input, long unsigned int inp_len, vec* args) {
 			vec_add(args, getSubstring(input, start_pos, i));
 		}
 	}
-	//printf("NUMBER OF SUBSTRINGS: %d\n", args->count);
+	#if VLEVEL > 2
+	printf("NUMBER OF SUBSTRINGS: %d\n", args->count);
+	#endif
 }
 
 int handleShellCommands(vec* args, int* msg_buff) {
@@ -63,9 +67,11 @@ int handleShellCommands(vec* args, int* msg_buff) {
 int handleChild(vec* args) {
 	// Create array
 	char** arg_array = (char**)vec_to_array(args);
-	/*for (size_t i = 0; i < args->count; i++) {
+	#if VLEVEL > 2
+	for (size_t i = 0; i < args->count; i++) {
 		printf("IDX %d ARG %s\n", i, (arg_array[i]));
-	}*/
+	}
+	#endif
 	execvp((arg_array[0]), arg_array);
 	return 0;
 }
@@ -86,7 +92,9 @@ int mainLoop() {
 		// Separate input into substrings and store in vector data structure
 		vec args; vec_init(&args);
 		getArgs(inp_buff, inp_len, &args);
-		//vec_print(args);
+		#if VLEVEL > 1
+		vec_print(&args);
+		#endif
 
 		if (args.count == 0) {
 			continue;
