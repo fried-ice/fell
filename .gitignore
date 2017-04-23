@@ -3,6 +3,7 @@
 *.xz
 *.log
 *.m4
+*.o
 Makefile
 fell
 configure
@@ -14,6 +15,8 @@ depcomp
 install-sh
 missing
 stamp-h1
+.dirstamp
+.deps/
 
 
 autom4te.cache/
