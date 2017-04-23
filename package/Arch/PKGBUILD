@@ -1,0 +1,30 @@
+# Maintainer: Fried.Ice <fried.ice.94@gmail.com>
+
+pkgname=fell
+pkgver=0.1
+pkgrel=1
+pkgdesc="Simple educational purpose shell"
+arch=('i686' 'x86_64')
+url="https://github.com/fried-ice/fell"
+license=('GPL3')
+depends=('glibc')
+optdepends=()
+makedepends=()
+conflicts=(${pkgname}-git)
+source=(${url}/releases/download/${pkgver}/${pkgname}-${pkgver}.tar.gz)
+sha256sums=('1d20ed725b1d3d6edbf17b1fdf5605c0ce568501d312894015fe132a0a9c12a9')
+
+prepare() {
+    cd ${pkgname}-${pkgver}
+    ./configure --prefix=/usr
+}
+
+build() {
+	cd ${pkgname}-${pkgver}
+	make
+}
+
+package() {
+	cd ${pkgname}-${pkgver}
+	make DESTDIR="${pkgdir}" install
+}
