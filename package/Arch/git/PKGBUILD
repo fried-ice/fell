@@ -2,7 +2,7 @@
 
 _pkgname=fell
 pkgname=${_pkgname}-git
-pkgver=20170422
+pkgver=20170423
 pkgrel=1
 pkgdesc="Simple educational purpose shell"
 arch=('i686' 'x86_64')
@@ -10,6 +10,7 @@ url="https://github.com/fried-ice/fell"
 license=('GPL3')
 depends=('glibc')
 optdepends=()
+conflicts=(${_pkgname})
 makedepends=('git')
 source=(${_pkgname}::git+${url}.git#branch=master)
 sha256sums=('SKIP')
