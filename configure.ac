@@ -17,11 +17,15 @@ AC_PROG_CC_STDC
 AC_CHECK_HEADERS([stdlib.h string.h unistd.h])
 
 # Checks for typedefs, structures, and compiler characteristics.
+AC_CHECK_HEADER_STDBOOL
+AC_TYPE_PID_T
+AC_TYPE_SIZE_T
+AC_TYPE_SSIZE_T
 
 # Checks for library functions.
 AC_FUNC_FORK
 AC_FUNC_MALLOC
-AC_CHECK_FUNCS([memset])
+AC_FUNC_REALLOC
 
 AC_CONFIG_FILES([Makefile
                  man/Makefile
