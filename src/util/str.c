@@ -3,8 +3,9 @@
 char* getSubstring(char* input, long unsigned start, long unsigned int end) {
 	long unsigned int len = end - start;
 
-	char* sub_string = malloc((len) * sizeof(char));
+	char* sub_string = malloc((len + 1) * sizeof(char));
 	memcpy(sub_string, &input[start], len * sizeof(char));
+	sub_string[len] = 0;
 
 	#if VLEVEL > 2
 	printf("START %d, END %d, SUBSTRING %s\n", start, end, sub_string);
