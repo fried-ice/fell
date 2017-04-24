@@ -81,7 +81,8 @@ int handleChild(vec* args) {
 
 int mainLoop() {
 
-	while (1) {
+	int loop = 1;
+	while (loop) {
 		// Get input from STDIN
 		char* inp_buff = 0;
 		size_t inp_siz = 0;
@@ -99,31 +100,35 @@ int mainLoop() {
 		vec_print(&args);
 		#endif
 
+		int msg_buff = 0;
+
+		// Handle empty input
 		if (args.count == 0) {
-			continue;
+			msg_buff = -1;
+		} else {
+			// Detect shell specific commands
+			handleShellCommands(&args, &msg_buff);
 		}
 
-		// Detect shell specific commands
-		int msg_buff;
-		handleShellCommands(&args, &msg_buff);
 		// Exit shell
 		if (msg_buff == 1) {
 			printf("Exiting!\n");
-			break;
+			loop = 0;
 		}
 
-		printf("\n");
+		// No shell builtin is detected, try exec on input
+		if (msg_buff == 0) {
+			// Actual process initialization
+			pid_t pid = fork();
+			int child_status = 0;
 
-		// Actual process initialization
-		pid_t pid = fork();
-		int child_status = 0;
-
-		if (pid < 0) {
-			perror("Error during fork");
-		} else if (pid == 0) { // Child process
-			handleChild(&args);
-		} else {
-			waitpid(pid, &child_status, WUNTRACED | WCONTINUED);
+			if (pid < 0) {
+				perror("Error during fork");
+			} else if (pid == 0) { // Child process
+				handleChild(&args);
+			} else {
+				waitpid(pid, &child_status, WUNTRACED | WCONTINUED);
+			}
 		}
 
 		free(inp_buff);
