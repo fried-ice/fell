@@ -15,6 +15,7 @@
 #define VERSION_PATCH 0
 
 #define CMD_EXIT "exit"
+#define CMD_CD "cd"
 
 /* msg_buff
 Describes an pre definied int,
@@ -22,12 +23,15 @@ used to determine further acting:
 	-1 -> empty input
 	0  -> regular program execution
 	1  -> exit command
+	2  -> change directory command
 msg_buff */
 
 int handleShellCommands(vec* args, int* msg_buff) {
 
 	if (strncmp(vec_get(args, 0), CMD_EXIT, sizeof(char) * strlen(vec_get(args, 0))) == 0) {
 		*msg_buff = 1;
+	} else if (strncmp(vec_get(args, 0), CMD_CD, sizeof(char) * strlen(vec_get(args, 0))) == 0) {
+		*msg_buff = 2;
 	}
 	return 0;
 }
@@ -82,6 +86,12 @@ int mainLoop() {
 		if (msg_buff == 1) {
 			printf("Exiting!\n");
 			loop = 0;
+		}
+
+		if (msg_buff == 2) {
+			if (chdir(vec_get(&args, 1)) < 0) {
+				perror("Directory not existent");
+			}
 		}
 
 		// No shell builtin is detected, try exec on input
