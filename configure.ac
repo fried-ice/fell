@@ -11,6 +11,9 @@ AC_CONFIG_HEADERS([config.h])
 AC_PROG_CC
 AC_PROG_CC_STDC
 
+# Checks fo functions
+AC_CHECK_FUNCS([getcwd])
+
 # Checks for libraries.
 
 # Checks for header files.

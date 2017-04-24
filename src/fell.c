@@ -6,6 +6,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include <getopt.h>
+#include <errno.h>
 
 #include "vec.h"
 #include "str.h"
@@ -51,10 +52,36 @@ int handleChild(vec* args) {
 	return 0;
 }
 
+// This function is rather an experiment - but hey, it seems to work
+char* getCurrentWorkingDir() {
+	// Add 32 characters to the buffer until its large enough
+	// for content to fit
+	#define CWD_BUFF_SIZE 32
+	size_t buff_size = CWD_BUFF_SIZE * sizeof(char);
+	char* buff = malloc(buff_size);
+
+	// Increase buffer if getcwd() fails with errno 34 - ENOMEM (Not enough space)
+	while (getcwd(buff, buff_size) == NULL && errno == 34) {
+		#if VLEVEL > 1
+		printf("CWD Buffer too small (%zu), increasing by %d\n", buff_size, CWD_BUFF_SIZE);
+		#endif
+		buff_size += CWD_BUFF_SIZE * sizeof(char);
+		buff = realloc(buff, buff_size);
+	}
+	return buff;
+}
+
 int mainLoop() {
 
 	int loop = 1;
 	while (loop) {
+
+		// Display current working directory
+		char* cwd = getCurrentWorkingDir();
+		printf("%s >> ", cwd);
+		free(cwd);
+
+
 		// Get input from STDIN
 		char* inp_buff = 0;
 		size_t inp_siz = 0;
@@ -62,6 +89,8 @@ int mainLoop() {
 		inp_len =  getline(&inp_buff, &inp_len, stdin);
 		if (inp_len < 0) {
 			perror("Error during read");
+			free(inp_buff);
+			inp_buff = NULL;
 			continue;
 		}
 
