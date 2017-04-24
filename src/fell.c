@@ -72,7 +72,10 @@ int handleChild(vec* args) {
 		printf("IDX %d ARG %s\n", i, (arg_array[i]));
 	}
 	#endif
-	execvp((arg_array[0]), arg_array);
+	if (execvp((arg_array[0]), arg_array) < 0) {
+			perror("Error on execute");
+		}
+		_exit(1);
 	return 0;
 }
 
