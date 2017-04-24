@@ -2,11 +2,13 @@ cmake_minimum_required (VERSION 3.0)
 project (fell)
 
 set(HEADERS
+    src/util/str.h
     src/util/vec.h
 )
 
 set(SOURCES
     src/fell.c
+    src/util/str.c
     src/util/vec.c
 )
 
