@@ -8,7 +8,7 @@ char* getSubstring(char* input, long unsigned start, long unsigned int end) {
 	sub_string[len] = 0;
 
 	#if VLEVEL > 2
-	printf("START %d, END %d, SUBSTRING %s\n", start, end, sub_string);
+	printf("Start: %d, End: %d, Substring: \"%s\"\n", start, end, sub_string);
 	#endif
 
 	return sub_string;
@@ -18,6 +18,10 @@ void getArgs(char* input, long unsigned int inp_len, vec* args) {
 
 	bool in_arg = false;
 	long unsigned int start_pos = 0;
+
+	#if VLEVEL > 2
+	puts("ARGUMENT PARSING:");
+	#endif
 
 	// Separate into strings
 	for (long unsigned int i = 0; i < inp_len; ++i) {
@@ -33,6 +37,6 @@ void getArgs(char* input, long unsigned int inp_len, vec* args) {
 	}
 
 	#if VLEVEL > 2
-	printf("NUMBER OF SUBSTRINGS: %d\n", args->count);
+	printf("\nNUMBER OF SUBSTRINGS: %d\n\n", args->count);
 	#endif
 }

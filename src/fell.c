@@ -41,14 +41,16 @@ int handleChild(vec* args) {
 	// Create array
 	char** arg_array = (char**)vec_to_array(args);
 	#if VLEVEL > 2
+	puts("EXEC ARGS:");
 	for (size_t i = 0; i < args->count; i++) {
-		printf("IDX %d ARG %s\n", i, (arg_array[i]));
+		printf("Index: %d, Argument \"%s\"\n", i, (arg_array[i]));
 	}
+	puts("");
 	#endif
 	if (execvp((arg_array[0]), arg_array) < 0) {
 			perror("Error on execute");
-		}
-		_exit(1);
+	}
+	_exit(1);
 	return 0;
 }
 
@@ -87,6 +89,9 @@ int mainLoop() {
 		size_t inp_siz = 0;
 		ssize_t inp_len = 0;
 		inp_len =  getline(&inp_buff, &inp_len, stdin);
+		#if VLEVEL > 2
+		printf("GETLINE: \"%s\"\n\n", inp_buff);
+		#endif
 		if (inp_len < 0) {
 			perror("Error during read");
 			free(inp_buff);

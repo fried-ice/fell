@@ -66,6 +66,7 @@ void vec_free(vec* v) {
 }
 
 void vec_print(vec* v) {
+    puts("VECTOR STRUCT:");
     printf("Current item count: %d\n", v->count);
     printf("Current capacity: %d\n", v->capacity);
     printf("Current char interpreted items:\n");
