@@ -164,7 +164,7 @@ int main(int argc, char **argv) {
 	while((c = getopt_long(argc, argv, "vh", long_options, NULL)) != -1) {
 		switch (c) {
 			case 'v':
-				printf("fell version %d.%d.%d\n", VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH);
+				printf("fell version %d.%d.%d\n", VERSION_MAJOR, VERSION_MINOR, VERSION_MICRO);
 				return EXIT_SUCCESS;
 			case 'h':
 				puts("For help, read fell´s man page - 'man 1 fell'");
