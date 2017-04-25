@@ -20,9 +20,9 @@ else
 fi
 
 # src/fell.c
-sed -i "s|^#define VERSION_MAJOR [0-9]*|#define VERSION_MAJOR $1|" src/fell.c
-sed -i "s|^#define VERSION_MINOR [0-9]*|#define VERSION_MINOR $2|" src/fell.c
-sed -i "s|^#define VERSION_MICRO [0-9]*|#define VERSION_MICRO $3|" src/fell.c
+sed -i "s|^#define VERSION_MAJOR \"[0-9]*\"|#define VERSION_MAJOR \"$1\"|" src/fell.c
+sed -i "s|^#define VERSION_MINOR \"[0-9]*\"|#define VERSION_MINOR \"$2\"|" src/fell.c
+sed -i "s|^#define VERSION_MICRO \"[0-9]*\"|#define VERSION_MICRO \"$3\"|" src/fell.c
 
 # configure.ac
 sed -i "s|^AC_INIT(\[fell\], \[$VER_REGEX\],|AC_INIT([fell], [$VER_STRING],|" configure.ac

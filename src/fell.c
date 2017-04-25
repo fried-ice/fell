@@ -11,9 +11,9 @@
 #include "vec.h"
 #include "str.h"
 
-#define VERSION_MAJOR 0
-#define VERSION_MINOR 1
-#define VERSION_MICRO 0
+#define VERSION_MAJOR "0"
+#define VERSION_MINOR "1"
+#define VERSION_MICRO "0"
 
 #define CMD_EXIT "exit"
 #define CMD_CD "cd"
@@ -164,7 +164,7 @@ int main(int argc, char **argv) {
 	while((c = getopt_long(argc, argv, "vh", long_options, NULL)) != -1) {
 		switch (c) {
 			case 'v':
-				printf("fell version %d.%d.%d\n", VERSION_MAJOR, VERSION_MINOR, VERSION_MICRO);
+				printf("fell version %s.%s.%s\n", VERSION_MAJOR, VERSION_MINOR, VERSION_MICRO);
 				return EXIT_SUCCESS;
 			case 'h':
 				puts("For help, read fell´s man page - 'man 1 fell'");
