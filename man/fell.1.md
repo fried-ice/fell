@@ -1,6 +1,6 @@
 % fell(1) 0.1 | Fell Manual
 % Fried Ice
-% 27 April 2017
+% 26 April 2017
 
 # NAME
 
@@ -12,7 +12,7 @@
 
 # DESCRIPTION
 
-__fell__ is a simple shell created for understanding the linux way of creating new processes by forking and executing. It is not supposed to deliver every day usage shell experience.
+__fell__ is a simple shell created for understanding the linux way of creating new processes by forking and executing. It is **not** supposed to deliver every day usage shell experience and is most likely filled with bugs and security problems.
 
 # OPTIONS
 
