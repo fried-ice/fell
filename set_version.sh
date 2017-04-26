@@ -27,8 +27,8 @@ sed -i "s|^#define VERSION_MICRO \"[0-9]*\"|#define VERSION_MICRO \"$3\"|" src/f
 # configure.ac
 sed -i "s|^AC_INIT(\[fell\], \[$VER_REGEX\],|AC_INIT([fell], [$VER_STRING],|" configure.ac
 
-# man/fell.1
-sed -i "s|\"$VER_REGEX\" \"fell man page\"$|\"$VER_STRING\" \"fell man page\"|" man/fell.1
+# man/fell.1.md
+sed -i "s|^% fell(1) $VER_REGEX|% fell(1) $VER_STRING|" man/fell.1.md
 
 # package/Arch/PKGBUILD
 sed -i "s|pkgver=$VER_REGEX|pkgver=$VER_STRING|" package/Arch/PKGBUILD

@@ -11,7 +11,7 @@ license=('GPL3')
 depends=('glibc')
 optdepends=()
 conflicts=(${_pkgname})
-makedepends=('git')
+makedepends=('git, pandoc')
 source=(${_pkgname}::git+${url}.git#branch=master)
 sha256sums=('SKIP')
 
