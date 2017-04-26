@@ -12,7 +12,7 @@ optdepends=()
 makedepends=()
 conflicts=(${pkgname}-git)
 source=(${url}/releases/download/${pkgver}/${pkgname}-${pkgver}.tar.gz)
-sha256sums=('6425e9cf4a134e98229543187753eec7e5cb338acf40bcaa990d9aedb491f092')
+sha256sums=('eef669e80dedda20952ca083b3d91634a2e4bc04925542450d247fd2fb7080e1')
 
 prepare() {
     cd ${pkgname}-${pkgver}
