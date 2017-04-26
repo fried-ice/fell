@@ -86,13 +86,12 @@ int mainLoop() {
 
 		// Get input from STDIN
 		char* inp_buff = 0;
-		size_t inp_siz = 0;
-		ssize_t inp_len = 0;
+		size_t inp_len = 0;
 		inp_len =  getline(&inp_buff, &inp_len, stdin);
 		#if VLEVEL > 2
 		printf("GETLINE: \"%s\"\n\n", inp_buff);
 		#endif
-		if (inp_len < 0) {
+		if (inp_len == 0) {
 			perror("Error during read");
 			free(inp_buff);
 			inp_buff = NULL;

@@ -67,11 +67,11 @@ void vec_free(vec* v) {
 
 void vec_print(vec* v) {
     puts("VECTOR STRUCT:");
-    printf("Current item count: %d\n", v->count);
-    printf("Current capacity: %d\n", v->capacity);
+    printf("Current item count: %zu\n", v->count);
+    printf("Current capacity: %zu\n", v->capacity);
     printf("Current char interpreted items:\n");
     for (size_t i = 0; i < v->count; i++) {
-        printf("Index: %d: \"%s\"\n", i, vec_get(v, i));
+        printf("Index: %zu: \"%s\"\n", i, (char*)vec_get(v, i));
     }
     printf("\n");
 }
