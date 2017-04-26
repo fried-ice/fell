@@ -12,7 +12,7 @@
 #include "str.h"
 
 #define VERSION_MAJOR "0"
-#define VERSION_MINOR "1"
+#define VERSION_MINOR "2"
 #define VERSION_MICRO "0"
 
 #define CMD_EXIT "exit"

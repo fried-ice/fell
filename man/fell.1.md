@@ -1,4 +1,4 @@
-% fell(1) 0.1 | Fell Manual
+% fell(1) 0.2 | Fell Manual
 % Fried Ice
 % 26 April 2017
 
