@@ -7,6 +7,10 @@ compiler:
 dist: trusty
 sudo: required
 
+addons:
+    apt_packages:
+        - pandoc
+
 script:
         - ./prepare.sh
         - ./configure
