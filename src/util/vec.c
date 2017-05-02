@@ -62,6 +62,9 @@ void vec_check_resize(vec* v) {
 }
 
 void vec_free(vec* v) {
+    for (size_t i = 0; i < v->count; i++) {
+        free(vec_get(v, i));
+    }
     free(v->items);
 }
 
