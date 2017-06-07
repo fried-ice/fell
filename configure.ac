@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.68])
-AC_INIT([fell], [0.2], [fried.ice.94@gmail.com])
+AC_INIT([fell], [0.2.1], [fried.ice.94@gmail.com])
 AM_INIT_AUTOMAKE([subdir-objects])
 AC_CONFIG_SRCDIR([src/fell.c])
 AC_CONFIG_HEADERS([config.h])

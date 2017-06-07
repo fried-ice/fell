@@ -1,7 +1,7 @@
 # Maintainer: Fried.Ice <fried.ice.94@gmail.com>
 
 pkgname=fell
-pkgver=0.2
+pkgver=0.2.1
 pkgrel=1
 pkgdesc="Simple educational purpose shell"
 arch=('i686' 'x86_64')
@@ -12,7 +12,7 @@ optdepends=()
 makedepends=()
 conflicts=(${pkgname}-git)
 source=(${url}/releases/download/${pkgver}/${pkgname}-${pkgver}.tar.gz)
-sha256sums=('eef669e80dedda20952ca083b3d91634a2e4bc04925542450d247fd2fb7080e1')
+sha256sums=('f1c480c6fea18d15665848fbe59723d9031e6f13c56a43911ef42ea4b56be18c')
 
 prepare() {
     cd ${pkgname}-${pkgver}
