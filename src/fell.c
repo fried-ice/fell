@@ -7,6 +7,7 @@
 #include <stdbool.h>
 #include <getopt.h>
 #include <errno.h>
+#include <unistd.h>
 
 #include "vec.h"
 #include "str.h"
@@ -17,6 +18,7 @@
 
 #define CMD_EXIT "exit"
 #define CMD_CD "cd"
+#define CMD_PIPE "|"
 
 /* msg_buff
 Describes an pre definied int,
@@ -43,12 +45,53 @@ int handleChild(vec* args) {
 	#if VLEVEL > 2
 	puts("EXEC ARGS:");
 	for (size_t i = 0; i < args->count; i++) {
-		printf("Index: %d, Argument \"%s\"\n", i, (arg_array[i]));
+		printf("Index: %zu, Argument \"%s\"\n", i, (arg_array[i]));
 	}
 	puts("");
 	#endif
-	if (execvp((arg_array[0]), arg_array) < 0) {
-			perror("Error on execute");
+
+	// Really dirty implementation of process pipes following
+	// If there is a pipe character, we will splitt - no matter what
+	int found_pipe = 0;
+	for (size_t i = 0; i < args->count; i++) {
+		if (strcmp(vec_get(args, i), CMD_PIPE) == 0) {
+			#if VLEVEL > 2
+			printf("Found pipe at position %zu\n", i);
+			#endif
+			found_pipe = i;
+			// Replace pipe char in user input by NULL so it wont harm later
+			free(arg_array[i]);
+			arg_array[i] = NULL;
+		}
+	}
+
+	// No pipe is created, just execute and exit afterwards
+	if (!found_pipe) {
+		if (execvp((arg_array[0]), arg_array) < 0) {
+				perror("Error on execute");
+		}
+	} else { // A pipe is created
+		int pipe_fds[2];
+		pipe(pipe_fds);
+		pid_t pid = fork();
+
+		if (pid < 0) {
+			perror("Error during fork for pipe");
+		} else if (pid == 0) { // Write stdout of process 1 to pipe
+			close(pipe_fds[0]);
+			dup2(pipe_fds[1],1);
+			if (execvp((arg_array[0]), arg_array) < 0) {
+					perror("Error on execute 1");
+			}
+		} else { // Read from pipe into stdin of process 2
+			close(pipe_fds[1]);
+			dup2(pipe_fds[0],0);
+			if (execvp((arg_array[found_pipe+1]), &arg_array[found_pipe+1]) < 0) {
+					perror("Error on execute 2");
+			}
+			//waitpid(pid, &child_status, WUNTRACED | WCONTINUED);
+		}
+
 	}
 	_exit(1);
 	return 0;
