@@ -1,0 +1,19 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        fetch-depth: 1
+    - name: Create configure script
+      run: ./prepare.sh
+    - name: Configure project
+      run: ./configure
+    - name: compile
+      run: make clean check -j2
