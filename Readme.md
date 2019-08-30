@@ -1,5 +1,7 @@
 # FELL - the Furious shELL
-[![Build Status](https://travis-ci.org/fried-ice/fell.svg?branch=master)](https://travis-ci.org/fried-ice/fell)
+
+[![Actions Status](https://github.com/fried-ice/fell/workflows/CI/badge.svg)](https://github.com/fried-ice/fell/actions)
+
 
 ## Overview
 Fell is a simple shell programm.  
