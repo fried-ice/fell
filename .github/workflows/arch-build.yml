@@ -1,0 +1,16 @@
+name: arch-linux-pkg
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        fetch-depth: 1
+    - name: build Arch linux package
+      uses: docker://friedice/arch-build
+      with:
+        entrypoint: /usr/bin/bash
+        args: -c "chmod -R 777 . && su -m -c 'cd package/Arch && makepkg' build-user"
